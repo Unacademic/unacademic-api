@@ -1,0 +1,6 @@
+npm-debug.log
+node_modules
+data
+.c9
+.vagrant
+devops/provision/keys/*

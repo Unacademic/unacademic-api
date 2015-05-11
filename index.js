@@ -11,7 +11,24 @@ const app = express();
 const namespace = '/api/0';
 
 var mongoLocalURL = "mongodb://" + dbHost + ":" + dbPort + "/" + dbName;
-mongoose.connect(mongoLocalURL);
+
+/// -------- quick fix -------------------
+
+const port = process.env.PORT || '3000';
+const host = process.env.HOST || '0.0.0.0';
+
+var login = {
+  "user": "testuser",
+  "pass": "blabla"
+};
+
+var mongoLabURL = "mongodb://" + login.user + ":" + login.pass + "@ds029051.mongolab.com:29051/unacademic_api";
+
+mongoose.connect(mongoLabURL);
+
+/// -------- quick fix ---------
+
+// mongoose.connect(mongoLocalURL);
 
 var con = mongoose.connection;
 
@@ -57,5 +74,13 @@ app.get('/', function(req,res){
 app.get(namespace, function(req, res) {
 	res.send('respond with API message');
 });
+
+/// -------- quick fix ---------
+
+app.listen(port, host);
+
+console.log('Server running on %s:%d...', host, port);
+
+/// ---------------------------
 
 module.exports = app;
